@@ -2,7 +2,7 @@ import { GET_USER_INFO } from 'actions/userInfo';
 
 
 const initState = {
-    userInfo: {}
+    list:[]
 };
 
 export default function reducer(state = initState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initState, action) {
         case GET_USER_INFO:
             return {
                 ...state,
-                userInfo: action.payload,
+                list: action.payload,
             };
         default:
             return state;
