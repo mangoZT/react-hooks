@@ -2,7 +2,8 @@ import React, { useReducer, useEffect } from 'react';
 import {connect} from 'react-redux';
 import {getUserInfo} from "actions/userInfo";
 import { Input, Button, List } from 'antd';
-import style from './index.less'
+import useSearchData from 'hooks/request'; 
+import style from './index.less';
 
 
 
@@ -21,11 +22,11 @@ const UserInfo = (props) => {
     // 初始化reducer
     const initialState = {title: "", search:false};
     const [state, dispatch] = useReducer(reducer, initialState);
- 
+    const {isLoading, data, doRequest} = useSearchData('/api/getList',state.title);
     // 查询数据
     useEffect(() => {
-        props.getUserInfo(state.title);
-    }, [state.search]);
+        props.getUserInfo(data);
+    }, [data]);
 
 
     // 参数变化
@@ -35,7 +36,7 @@ const UserInfo = (props) => {
 
     // 执行查询
     const doSearch = () => {
-        dispatch({type: 'change', playod:{search:!state.search}})
+        doRequest(state.title);
     }
 
     const { list=[] } = props.userInfo;
@@ -48,6 +49,7 @@ const UserInfo = (props) => {
             <List
                 header={<div>列表</div>}
                 footer={null}
+                loading={isLoading}
                 bordered
                 dataSource={list}
                 renderItem={item => (<List.Item>{item}</List.Item>)}

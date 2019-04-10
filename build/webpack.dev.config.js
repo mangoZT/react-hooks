@@ -9,7 +9,7 @@ module.exports = {
             '@babel/polyfill',
             path.join(__dirname, '../src/index.js')
         ],
-        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
+        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux', 'antd']
     },
     mode:'development',
     /*输出到dist文件夹，输出文件名字为bundle.js*/
@@ -75,6 +75,7 @@ module.exports = {
             router: path.join(__dirname, '../src/router'),
             images: path.join(__dirname, '../src/images'),
             actions: path.join(__dirname, '../src/redux/actions'),
+            hooks: path.join(__dirname, '../src/hooks'),
             reducers: path.join(__dirname, '../src/redux/reducers')
         }
     },
